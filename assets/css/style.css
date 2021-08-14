@@ -72,3 +72,15 @@ footer{
         height: auto;
     }
 }
+
+.elementos-internos{
+    background-color: #e5eecc;
+    border: 1px solid #d4d4d4;
+    padding: 50px;
+    position: relative;
+    text-align: center;
+}
+
+.elemento-jquery{
+    margin: 50px;
+}
