@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <title>Java Script</title>
+  </head>
+  <body>
+      <div class="container ahorcado">
+        <div class="container-fluid mt-2">
+            <label for=""><h2>Palabra</h2></label>
+            <label class="textColor m-3" for="" id="lbl-palabra"><strong></strong></label>
+            <hr />
+            <br />
+            <canvas
+              class="border border-4 border-success mb-4"
+              id="fondo"
+              width="450"
+              height="450"
+            ></canvas>
+            <br />
+            <label class="textColor" for=""><h3><strong>Letra</strong></h3></label>
+            <input type="text" id="txt-intentos" />
+            <input
+              class="btn btn-primary"
+              type="button"
+              id="btn-intentar"
+              value="Intentar"
+            />
+          </div>
+      </div>
+    
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

@@ -33,6 +33,10 @@
     margin-top: 10%;
 }
 
+#lbl-palabra{
+    font-size: 25px;
+}
+
 .item{
     height: 150px;
     padding: 10px;
@@ -81,6 +85,23 @@ footer{
     text-align: center;
 }
 
+.ahorcado{
+    display: grid;
+    align-items: center;
+    position: relative;
+    margin-left: 25%;
+    text-align: center;
+}
+
 .elemento-jquery{
     margin: 50px;
+}
+
+.selector{
+    border: 3px solid red;
+}
+
+.textColor{
+    color: blue;
+    text-align: center;
 }
