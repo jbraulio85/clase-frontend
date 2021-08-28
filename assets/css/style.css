@@ -77,6 +77,10 @@ footer{
     }
 }
 
+.background{
+    background-color:aliceblue;
+}
+
 .elementos-internos{
     background-color: #e5eecc;
     border: 1px solid #d4d4d4;

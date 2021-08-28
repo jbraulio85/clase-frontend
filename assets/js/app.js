@@ -3,10 +3,11 @@ var lapiz = canvas.getContext("2d");
 var btnIntentar = document.getElementById("btn-intentar");
 var letra = document.getElementById("txt-intentos");
 var palabraAdivinar = document.getElementById("lbl-palabra");
+var lblIntentos = document.getElementById('lbl-intentos');
 var palabraAuxiliar = "";
 
 var palabra = "";
-var numeroImagen = 1;
+var numeroImagen = 0;
 var intentos = 5;
 
 var ahorcadoUno = {
@@ -36,54 +37,90 @@ var ahorcadoCinco = {
 
 ahorcadoUno.imagen = new Image();
 ahorcadoUno.imagen.src = ahorcadoUno.url;
-ahorcadoUno.imagen.addEventListener("load", function () {});
+ahorcadoUno.imagen.addEventListener("load", function () {dibujar()});
 
 ahorcadoDos.imagen = new Image();
 ahorcadoDos.imagen.src = ahorcadoDos.url;
-ahorcadoDos.imagen.addEventListener("load", function () {});
+ahorcadoDos.imagen.addEventListener("load", function () {dibujar()});
 
 ahorcadoTres.imagen = new Image();
 ahorcadoTres.imagen.src = ahorcadoTres.url;
-ahorcadoTres.imagen.addEventListener("load", function () {});
+ahorcadoTres.imagen.addEventListener("load", function () {dibujar()});
 
 ahorcadoCuatro.imagen = new Image();
 ahorcadoCuatro.imagen.src = ahorcadoCuatro.url;
-ahorcadoCuatro.imagen.addEventListener("load", function () {});
+ahorcadoCuatro.imagen.addEventListener("load", function () {dibujar()});
 
 ahorcadoCinco.imagen = new Image();
 ahorcadoCinco.imagen.src = ahorcadoCinco.url;
-ahorcadoCinco.imagen.addEventListener("load", function () {});
+ahorcadoCinco.imagen.addEventListener("load", function () {dibujar()});
 
 btnIntentar.addEventListener("click", function () {
-  var intento = letra.value;
-  var respuesta = validar(intento);
-  var transicion = '';
-  
-  for(i = 0; i < palabraAuxiliar.length; i++){
-    if(palabraAuxiliar.substring(i,i+1) === '#'){
-        if(palabraAuxiliar.substring(i,i+1) === respuesta.substring(i,i+1)){
-          transicion = transicion + palabraAuxiliar.substring(i,i+1);
-        }else{
-          transicion = transicion + respuesta.substring(i,i+1);
-        }
-    }else if(palabraAuxiliar.substring(i,i+1) != '#'){
-      transicion = transicion + palabraAuxiliar.substring(i,i+1);
-    }else if(palabra.substring(i,i+1) != respuesta){
-      alert('prueba')
+    var intento = letra.value;
+    var respuesta = validar(intento);
+    var transicion = '';
+
+    for(i = 0; i < palabraAuxiliar.length; i++){
+      if(palabraAuxiliar.substring(i,i+1) === '#'){
+          if(palabraAuxiliar.substring(i,i+1) === respuesta.substring(i,i+1)){
+            transicion = transicion + palabraAuxiliar.substring(i,i+1);
+          }else{
+            transicion = transicion + respuesta.substring(i,i+1);
+            control = false;
+          }
+      }else{
+        transicion = transicion + palabraAuxiliar.substring(i,i+1);
+      }
     }
-  }
-  if(transicion === palabra){
-    alert(`${palabra}  ${'Felicidades!!! has ganado.'}`)
-    location.reload();
-  }else{
-    palabraAuxiliar = transicion;
-    palabraAdivinar.innerHTML = palabraAuxiliar;
-  }
-});
+    if(transicion === palabra){
+      alert(`${'Felicidades!!! has ganado, la palabra es: '} ${palabra} `)
+      location.reload();
+    }else{
+      if(validarRespuesta(respuesta) === false){
+        intentos = intentos - 1;
+        numeroImagen = numeroImagen + 1;
+        dibujar();
+        if(intentos === 0){
+          alert('Ahorcado!!!! has perdido el juego =(');
+          //location.reload();
+        }else{
+          lblIntentos.innerHTML = `<span class="badge bg-danger">${intentos}</span>`;
+        }
+      } else {
+        palabraAuxiliar = transicion;
+        palabraAdivinar.innerHTML = palabraAuxiliar;
+      }
+    }
+  });
   
 
 function aleatorio(minimo, maximo) {
   return Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
+}
+
+function dibujar(){
+  if(numeroImagen == 1){
+    lapiz.drawImage(ahorcadoUno.imagen,-250,-20);
+  }else if (numeroImagen == 2){
+    lapiz.drawImage(ahorcadoDos.imagen,-250,-20);
+  }else if (numeroImagen == 3){
+    lapiz.drawImage(ahorcadoTres.imagen,-250,-20);
+  }else if (numeroImagen == 4){
+    lapiz.drawImage(ahorcadoCuatro.imagen,-250,-20);
+  }else if (numeroImagen == 5){
+    lapiz.drawImage(ahorcadoCinco.imagen,-250,-20);
+  }
+}
+
+function validarRespuesta(cadena){
+  var resultado = false;
+  for(var i = 0; i < cadena.length; i++){
+    if(cadena.substring(i,i+1) != '#'){
+      resultado = true;
+      break;
+    }
+  }
+  return resultado;
 }
 
 function obtenerPalabraAdivinar(numero) {
